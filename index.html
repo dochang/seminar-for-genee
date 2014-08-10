@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/reveal.js/2.6.2/css/reveal.css" />
+    <link rel="stylesheet" href="assets/reveal.js/2.6.2/css/theme/default.css" id="theme" />
+    <script src="assets/jquery/2.1.0/jquery.js"></script>
+    <script src="assets/reveal.js/2.6.2/js/reveal.js"></script>
+    <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+      return $(function() {
+        return Reveal.initialize({
+          history: true
+        });
+      });
+    }).call(this);</script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>REST</h1>
+        </section>
+        <section>
+          <h2>RPC 的缺点</h2>
+          <ul>
+            <li>客户端必须知道方法名</li>
+            <li>方法参数的顺序、类型、个数有规定。</li>
+            <li>代码高度耦合</li>
+            <li>不能缓存</li>
+            <li>依赖多</li>
+          </ul>
+        </section>
+        <section>
+          <h2>REST 的优点</h2>
+          <ul>
+            <li>简单易懂</li>
+            <li>代码耦合度小</li>
+            <li>支持缓存</li>
+            <li>充分地利用 HTTP 协议，标准化的接口</li>
+            <li>依赖少，客户端只需要解析 HTTP 消息</li>
+          </ul>
+        </section>
+        <section>
+          <h2>特征</h2>
+          <ul>
+            <li>每个 URI 代表一个资源</li>
+            <li>对资源的操作包括增删查改(CRUD)</li>
+            <li>通过修改资源的表现形式来操作资源</li>
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h2>要求</h2>
+            <ul>
+              <li>Client-Server</li>
+              <li>无状态</li>
+              <li>可缓存的</li>
+              <li>统一接口</li>
+              <li>分层系统</li>
+              <li>可编程（可选）</li>
+            </ul>
+          </section>
+          <section>
+            <h3>统一接口</h3>
+            <ul>
+              <li>资源的标识</li>
+              <li>资源的修改</li>
+              <li>足够的描述信息</li>
+              <li>所有可用的操作都应该通过单一的入口点发现</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h2>要素</h2>
+          <ul>
+            <li>URI</li>
+            <li>Media Type</li>
+            <li>HTTP methods</li>
+          </ul>
+        </section>
+        <section>
+          <h2>示例</h2>
+          <ul>
+            <li>
+              <code>http://example.com/users</code>
+            </li>
+            <li>
+              <code>http://example.com/users/user17</code>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <p>
+            <code>http://example.com/users</code>
+          </p>
+          <table>
+            <tr>
+              <td>GET</td>
+              <td>列出集合中的成员</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td>在集合中增加一个新的成员；自动分配新成员的 URI</td>
+            </tr>
+            <tr>
+              <td>PUT</td>
+              <td>替换整个集合</td>
+            </tr>
+            <tr>
+              <td>DELETE</td>
+              <td>删除整个集合</td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <p>
+            <code>http://example.com/users/user17</code>
+          </p>
+          <table>
+            <tr>
+              <td>GET</td>
+              <td>获取该成员的某种格式的数据</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td>通常用于在该成员下再建立子成员时使用</td>
+            </tr>
+            <tr>
+              <td>PUT</td>
+              <td>替换这个成员，如果不存在，则建立</td>
+            </tr>
+            <tr>
+              <td>DELETE</td>
+              <td>删除该成员</td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>安全的方法</h2>
+          <p>GET</p>
+        </section>
+        <section>
+          <h2>幂等 (idempotent) 的方法</h2>
+          <p>PUT, DELETE</p>
+        </section>
+        <section>
+          <h2>POST</h2>
+        </section>
+        <section>
+          <section>
+            <h2>重要的状态码</h2>
+          </section>
+          <section>
+            <ul>
+              <li>200 OK</li>
+              <li>201 Created</li>
+              <li>204 No Content</li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li>303 See Other</li>
+              <li>304 Not Modified</li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li>400 Bad Request</li>
+              <li>401 Unauthorized</li>
+              <li>403 Forbidden</li>
+              <li>404 Not Found</li>
+              <li>405 Method Not Allowed</li>
+              <li>409 Conflict</li>
+              <li>415 Unsupported Media Type</li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li>500 Internal Server Error</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h2>具体的例子</h2>
+          <pre><code>
+## REQUEST ##
+
+POST /api/carts
+Content-Type: application/json
+Content-Length: 1032
+
+{
+  "customerId": 1343,
+  "lineItems": [
+    {
+      "productId": 12343,
+      "quantity": 4
+    },
+    ...
+  ]
+}
+
+
+## RESPONSE ##
+
+HTTP/1.1 201 Created
+Location: /api/carts/323392
+</code></pre>
+        </section>
+        <section>
+          <h2>如何设计 REST API</h2>
+          <ul>
+            <li>转化为资源（设计 URI）</li>
+            <li>实现需要响应的请求方法 (GET/POST/PUT/DELETE)</li>
+            <li>决定需要的格式 (html/json/xml/...)</li>
+          </ul>
+        </section>
+        <section>
+          <h2>REST 不是</h2>
+          <ul>
+            <li>特定的库或框架</li>
+            <li>标准</li>
+            <li>协议</li>
+          </ul>
+        </section>
+        <section>
+          <p>REST 是一种</p>
+          <h2>设计风格</h2>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
