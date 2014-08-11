@@ -21,6 +21,35 @@
           <h1>REST</h1>
         </section>
         <section>
+          <h2>传统的 RPC 风格</h2>
+          <pre><code>
+## REQUEST ##
+
+POST /api
+Content-Type: application/json
+Content-Length: 80
+
+{
+  "jsonrpc": "2.0",
+  "method": "subtract",
+  "params": [42, 23],
+  "id": 1
+}
+
+## RESPONSE ##
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 50
+
+{
+  "jsonrpc": "2.0",
+  "result": 19,
+  "id": 1
+}
+</code></pre>
+        </section>
+        <section>
           <h2>RPC 的缺点</h2>
           <ul>
             <li>客户端必须知道方法名</li>
